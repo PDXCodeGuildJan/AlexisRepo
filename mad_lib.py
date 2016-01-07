@@ -1,5 +1,5 @@
 # Make a madlib that prompts the user for 5 words/phrases
-# and then adds those to a silly story.
+# and then add those to a silly story.
 
 madlib = "In the early 1900s, crossword "
 
@@ -10,8 +10,6 @@ madlib += plural_noun + " only appeared in children's books. "
 adjective = input("Please give an adjective, and if you could capitalize the first letter, that would be nice: ")
 
 madlib += adjective + " kinkajous first created these marvels. "
-
-#They were often considered (adjective2) in those days. Nonetheless, they were quite popular among (pluralnoun2). Today, (person) is a strong proponent of implimenting such practices in (place)
 
 adjective2 = input("Please give an adjective: ")
 
