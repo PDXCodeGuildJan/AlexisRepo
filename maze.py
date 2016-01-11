@@ -25,6 +25,16 @@
 # if user types "yes", print welcome slogan again and begin in White Room. if user types no, print "Thanks for playing. Goodbye!" and then exit the program. if user types anything else, print
 # "I'm sorry, I didn't understand that. Yes or no?" - make sure "yes" and "no" are not case sensitive
 
+def dark_room():
+	print("You are in complete darkness. You can't see anything except for a sliver of light to go back. ")
+
+	entry2 = ""
+	while entry2 != "exit" and entry2 != "back":
+	 	entry = input("Which way do you choose to go? ")
+	 	if entry == "back":
+	 		print("Something")
+	
+
 def main():
 	welcome = ("Welcome to the Maze! Good luck and enjoy the adventure."
 			" Type 'exit' to leave the Maze at any point. You are in a purely white,"
@@ -35,20 +45,27 @@ def main():
 	entry = ""
 
 	 #add no case sensitivity
-	while entry != "exit" or "east" or "west":
-		entry = input("Which door do you choose? " )
 
-		if entry == "exit": #add no case sensitivity
+	while entry != "exit" and entry != "east" and entry != "west":
+		entry = input("Which door do you choose? ")
+		if entry == "exit":
 			exit()
-		elif entry == "west": #add no case sensitivity
-			print("right") # execute function for Dark Room
-		elif entry == "east": #add no case sensitivity
-			print("wrong")# execute function for Furry Room
+		elif entry == "west":
+			dark_room()
+		elif entry == "east":
+			dark_room()
 		else:
-			print("I'm sorry, but I didn't understand that.")
+			print("I'm sorry, but I didn't understand that. ")
+
 
 main()
 
-def dark_room():
-	print("You are in complete darkness. You can't see anything except for a sliver of light to go back. ")
+
+
+
+
+	
+
+
+
 
