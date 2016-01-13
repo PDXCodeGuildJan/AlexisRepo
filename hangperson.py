@@ -47,8 +47,11 @@ def hangperson():
    # convert blankWord (which is a string) into a list (currentState)
    currentState = list(blankWord)
 
+   # Initialize the wrong guess list
+   incorrect = [] # sibling to currentState # creates a place to store the wrong guesses
+
    # Print the initial state of the game
-   printHangperson(currentState)
+   printHangperson(currentState, incorrect)
 
    # Start the game! Loop until the user either wins or loses
    while currentState != listedWord and numWrong < 6:
@@ -57,9 +60,12 @@ def hangperson():
       guess = userGuess()
 
       # see if the guess is in the word, update accordingly
-      currentState = updateState(guess, currentState)
+      bundledLists = updateState(guess, currentState, incorrect)
 
-      printHangperson(currentState)
+      currentState = bundledLists[0]
+      incorrect = bundledLists[1]
+
+      printHangperson(currentState, incorrect)
 
    # Determine if the user won or lost, and then tell them accordingly
    if numWrong == 6:
@@ -76,7 +82,7 @@ def hangperson():
 # currentState: the current state of the word/game
 #
 # return currentState
-def updateState(guess, currentState):
+def updateState(guess, currentState, incorrect):
    global numWrong
 
    # First, determine if the letter guessed is in the word.
@@ -87,6 +93,7 @@ def updateState(guess, currentState):
    if numInWord == 0: #means letter is wrong, so we update numWrong:
       numWrong = numWrong + 1 #short hand: numWrong += 1 (can also do with subtraction and multiplication)
       print("Wrong! That noose is feeling a little tighter...")
+      incorrect.append(guess)
    # If it is, congratulate them and update the state of the game.
    #    To update the state, make sure to replace ALL the '_' with
    #    the guessed letter.
@@ -106,7 +113,7 @@ def updateState(guess, currentState):
 
 
 
-   return currentState
+   return [currentState, incorrect]
 
 
 # This helpful function prompts the user for a guess,
@@ -135,7 +142,7 @@ def userGuess():
 # DO NOT CHANGE
 #
 # state: current state of the word
-def printHangperson(state):
+def printHangperson(state, incorrect):
    person = [" O "," | \n | ", "\| \n | ", "\|/\n | ", "\|/\n | \n/  ", "\|/\n | \n/ \\"]
    print()
 
@@ -151,6 +158,9 @@ def printHangperson(state):
       print(i, end=" ")
 
    print("\n")
+
+   print("Incorrect guesses: {}".format(incorrect))
+   print()
 
 # This line runs the program on import of the module
 hangperson()
