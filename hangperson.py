@@ -6,8 +6,8 @@ from random import randint # when you call randint, it expects two things: randi
 # in the range)
 
 words = ["kleptomaniac", "oligarchy", "apocalypse", "kinkajou", "papoose", "lackadaisical", "pedantic"]
-numWrong = 0 # do I need to change this?
-listedWord = [None] # do I need to change this?
+numWrong = 0
+listedWord = [None]
 
 # A function that starts and plays the hangperson game.
 # Users can be wrong a maximum of 5 times before they lose,
