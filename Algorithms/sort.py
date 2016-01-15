@@ -36,9 +36,7 @@ def selection_sort(unsorted_list):
 		currentIndex = first_num # whichever index we are currently at and the vantage point from which we are
 		# comparing the rest of the list
 		currentLowestIndex = first_num # the place for whichever number is the smallest thus far
-		while currentIndex < len(unsorted_list[first_num:]): # loops through whatever remaining list there is
-		# using the slice tool, which will progress based on the first_num (which will change each time via
-			# loop) and go to the end of the list, denoted by not putting anything after the colon
+		while currentIndex < len(unsorted_list): # loops through whatever remaining list there is
 			if unsorted_list[currentIndex] < unsorted_list[currentLowestIndex]: # specifies the number the index
 			# represents rather than the index itself, so if the number at the current index is less than
 			# current lowest number, then this will happen:
@@ -68,6 +66,11 @@ test = [4, 68, 57, 19, 3, 40]
 
 sorted_list = selection_sort(test)
 print("Sorted: ", sorted_list)
+
+# Bubble Sort
+# Given a list of items:
+# - start at the beginning
+# - compare every adjacent pair, swap their position if they are not in the right norder
 	 
 
 
