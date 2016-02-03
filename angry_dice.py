@@ -2,7 +2,7 @@
 	to match the specified criteria through 3 different stages, winning once
 	completing the third stage. Stage 1 requires rolling a 1 and 2, Stage 2 rolling 
 	an Angry Face (which replaces the 3) and a 4, and Stage 3 rolling a 5 and 6. The
-	player has the option of holding a die if the value matches one of the required
+	player has the option of locking a die if the value matches one of the required
 	dice values with any value except 6.
 	Rolling a pair of Angry Dice at any point will make you start
 	over at Stage 1. """ 
@@ -15,40 +15,96 @@ from random import randint
 
 def main():
 	""" The driving function that utilizes the smaller functions to create the Angry Dice game. """
+	start()
 
-	goal = goal_dict[current_stage]
+	while True:
 
-	advance_stage(goal)
+		# roll dice
+		roll_dice()
+		# evaluate dice
+
+		# double angry
+		angry = double_angry()
+
+		if not angry:
+			# check if advance stage
+			new_stage = advance_stage()
+			if not new_stage:
+				die_lock()
+			else:
+				input("Hit return to roll again!")
+
+	# you're going to need a while loop
+
 
 
 def start():
 	""" Welcomes the player and explains the rules of the game, as well as a quit option. """
-	print("Welcome to ANGRY DICE - the game where your dice get angry!")
-	# create an option to print instructions ("I") and a quit option ("Q")
-	# or maybe just print instructions automatically with welcome statement?
+	print("Welcome to ANGRY DICE - the game where your dice get angry! Enter 'q' to quit at any point. \n")
+	instruction_prompt = input("If you're new to the game, enter 'i' to view instructions. Otherwise hit return to start playing. ")
 
-	pass
+	if instruction_prompt.lower == "i":
+		print("Angry Dice is a single player game in which the player rolls two 6-sided dice to match the specified criteria through 3 different stages, winning once completing the third stage. Stage 1 requires rolling a 1 and 2, Stage 2 rolling an Angry Face (which replaces the 3) and a 4, and Stage 3 rolling a 5 and 6. The player has the option of locking a die if the value matches one of the required dice values with any value except 6. Rolling a pair of Angry Dice at any point will make you start over at Stage 1.")
+	elif instruction_prompt.lower() == "q":
+		exit()
+	else:
+		print("I'm sorry, I didn't understand that. ", instruction_prompt)
 
 
-def die_hold():
-	""" Asks if player would like to hold a die, then
+def roll_dice():
+	"""Rolls any die that is not locked."""
+	if not die_1.is_locked:
+		die_1.roll()
+		print("Rolling Die 1...")
+
+	# Print Die 1
+	print(die_1)
+
+	if not die_2.is_locked:
+		die_2.roll()
+		print("Rolling Die 2...")
+
+	# Print Die 2
+	print(die_2)
+
+
+def die_lock():
+	""" Asks if player would like to lock a die, then
 		determines whether selected die can be held or not and stores die """
 
-	hold_choice = input("Would you like to hold one of your dice? Please answer yes or no. ")
-	if hold_choice == "yes".lower():
-		hold_choice = input("What is the value of the die you would like to hold? ")
-		# return evaluate hold function?
-		if hold_choice == die_1.value or hold_choice == die_2.value:
-			# maintain the die value
-			die_1.value = hold_choice
-			hold_choice = locked_die
-			locked_die = die_1.value
+	global current_stage
+	goal = goal_dict[current_stage]
+
+	# Unlock everything
+	die_1.is_locked = False
+	die_2.is_locked = False
+	
+
+	lock_choice = input("Would you like to lock one of your dice? Please answer yes or no. ")
+	if lock_choice.lower() == "yes":
+		lock_choice = int(input("What is the value of the die you would like to lock? "))
+
+		if lock_choice <= 5:
+
+			if lock_choice == die_1.value and lock_choice in goal:
+				die_1.is_locked = True
+
+
+			elif lock_choice == die_2.value and lock_choice in goal:
+				die_2.is_locked = True
+
+			else:
+				print("Sorry, you can't lock that value!")
+
+
+		else:
+			print("Sorry, you can't lock that value!")
 			# make sure only die_2 is now rolled, but keep locked_die for match comparison purposes
 			# locked_die must unlock once match has been met and moving onto new stage
 
-	elif hold_choice == "no".lower():
-		print("Okay, let's roll the dice again! ")
-		# return roll function?
+	elif lock_choice.lower() == "no":
+		print("Okay, let's roll the dice again!")
+
 	else:
 		input("I'm sorry, I didn't understand that. Yes or no? ")
 
@@ -60,8 +116,7 @@ def die_hold():
 
 
 
-
-def double_angry(goal):	#value instead of goal?
+def double_angry():
 	""" What happens in the event of two angry dice appearing. """
 
 		# stage_1 - let user know they are at Stage 1, establish parameters: if roll is 1 and 2, proceed
@@ -81,49 +136,41 @@ def double_angry(goal):	#value instead of goal?
 	if die_1.value == 3 and die_2.value == 3:
 		# return to stage_1
 		print("You got ANGRY! Time to calm down and go back to Stage 1. ")
+		input("Hit return to roll again!")
 		current_stage = 1
-		return True # maybe?? go back to stage 1
+		return True
 	else:
-		return False # I don't know what I'm doing here
+		return False
 
-	# Check stage goals, modify to catch stage 3 (winner) match??
 
-def advance_stage(goal): # value instead of goal?
+def advance_stage():
 	
 	global current_stage
-
-
+	goal = goal_dict[current_stage]
+	
 	if die_1.value in goal and die_2.value in goal and die_1.value != die_2.value:
 		current_stage += 1
-		print("Congratulations! You've reached Stage ", current_stage, ". ") # problem in that it
-		# might print Stage 4 if you win
+		if current_stage <= 3:
+			print("Congratulations! You've reached Stage", current_stage)
+			return True 
+		else:
+			winner()
 
-	elif die_1.value in goal or die_2.value in goal: # may have to change to exclude value 6
-		die_hold()
-
-	else:
-		print("No goal matches here. Keep rolling!")
-		
-
-
-
+	return False
 
 def winner():
 	""" In the event of a win, determines which round to switch to or if the game is over. """
-	# is this all super sloppy coding??
-	if die_1.value in goal and die_2.value in goal and current_round == 3:
-		print("Yay, you win!!! ")
-		play_again = input("Would you like to play again? Please answer yes or no. ")
-		if play_again == "yes".lower():
-			start()
-		elif play_again == "no".lower():
-			print("Thank you for playing Angry Dice! Goodbye!")
-			exit()
-		else:
-			print("I'm sorry, I didn't understand that. ", play_again)
 
+	print("Yay, you win!!! ")
+	play_again = input("Would you like to play again? Please answer yes or no. ")
+	if play_again == "yes".lower():
+		main()
+	elif play_again == "no".lower():
+		print("Thank you for playing Angry Dice! Goodbye!")
+		exit()
 	else:
-		roll()
+		print("I'm sorry, I didn't understand that. ", play_again)
+
 
 
 
@@ -133,7 +180,7 @@ class Die:
 	def __init__(self): # initializes the object, its properties, self
 		""" Creates/defines the class objects (dice). """
 		self.value = 1 # self defines object, needs to be mentioned to know object is being modified
-		is_locked = False # Does this need a self?
+		self.is_locked = False
 		self.possible_values = {
 		1: """
 +-------+
@@ -192,6 +239,34 @@ die_1 = Die()
 die_2 = Die()
 current_stage = 1
 goal_dict = {1: [1, 2], 2: [3, 4], 3: [5, 6]}
+
+
+
+def test_advance_stage():
+	global current_stage
+
+	current_stage = 3
+	print(current_stage)
+	die_1.value = 5
+	die_2.value = 6
+	advance_stage()
+	print(current_stage)
+
+def test_die_lock():
+	die_1.value = 2
+	die_2.value = 6
+	print(die_lock())
+
+
+def test_double_angry():
+	global current_stage
+	current_stage = 3
+	die_1.value = 3
+	die_2.value = 3
+
+	double_angry()
+	print(current_stage)
+
 
 if __name__ == "__main__":
 	main()
