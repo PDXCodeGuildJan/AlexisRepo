@@ -17,7 +17,7 @@ def main():
 	""" The driving function that utilizes the smaller functions to create the Angry Dice game. """
 	start()
 
-	while True:
+	while True: # while what is true? aaahhh!!!
 
 		# roll dice
 		roll_dice()
@@ -29,13 +29,11 @@ def main():
 		if not angry:
 			# check if advance stage
 			new_stage = advance_stage()
+
 			if not new_stage:
 				die_lock()
 			else:
 				input("Hit return to roll again!")
-
-	# you're going to need a while loop
-
 
 
 def start():
@@ -43,12 +41,10 @@ def start():
 	print("Welcome to ANGRY DICE - the game where your dice get angry! Enter 'q' to quit at any point. \n")
 	instruction_prompt = input("If you're new to the game, enter 'i' to view instructions. Otherwise hit return to start playing. ")
 
-	if instruction_prompt.lower == "i":
+	if instruction_prompt.lower() == "i":
 		print("Angry Dice is a single player game in which the player rolls two 6-sided dice to match the specified criteria through 3 different stages, winning once completing the third stage. Stage 1 requires rolling a 1 and 2, Stage 2 rolling an Angry Face (which replaces the 3) and a 4, and Stage 3 rolling a 5 and 6. The player has the option of locking a die if the value matches one of the required dice values with any value except 6. Rolling a pair of Angry Dice at any point will make you start over at Stage 1.")
 	elif instruction_prompt.lower() == "q":
 		exit()
-	else:
-		print("I'm sorry, I didn't understand that. ", instruction_prompt)
 
 
 def roll_dice():
@@ -74,28 +70,24 @@ def die_lock():
 
 	global current_stage
 	goal = goal_dict[current_stage]
-
-	# Unlock everything
-	die_1.is_locked = False
-	die_2.is_locked = False
 	
 
 	lock_choice = input("Would you like to lock one of your dice? Please answer yes or no. ")
 	if lock_choice.lower() == "yes":
-		lock_choice = int(input("What is the value of the die you would like to lock? "))
+		lock_choice = input("What is the value of the die you would like to lock? ")
+		if lock_choice.isdigit():
+			lock_choice = int(lock_choice)
 
-		if lock_choice <= 5:
+			if lock_choice <= 5:
 
-			if lock_choice == die_1.value and lock_choice in goal:
-				die_1.is_locked = True
+				if lock_choice == die_1.value and lock_choice in goal:
+					die_1.is_locked = True
 
+				elif lock_choice == die_2.value and lock_choice in goal:
+					die_2.is_locked = True
 
-			elif lock_choice == die_2.value and lock_choice in goal:
-				die_2.is_locked = True
-
-			else:
-				print("Sorry, you can't lock that value!")
-
+				else:
+					print("Sorry, you can't lock that value!")
 
 		else:
 			print("Sorry, you can't lock that value!")
@@ -147,9 +139,12 @@ def advance_stage():
 	
 	global current_stage
 	goal = goal_dict[current_stage]
-	
+
 	if die_1.value in goal and die_2.value in goal and die_1.value != die_2.value:
 		current_stage += 1
+		# Unlock Everything
+		die_1.is_locked = False
+		die_2.is_locked = False
 		if current_stage <= 3:
 			print("Congratulations! You've reached Stage", current_stage)
 			return True 
@@ -170,6 +165,12 @@ def winner():
 		exit()
 	else:
 		print("I'm sorry, I didn't understand that. ", play_again)
+
+def end_game(string):
+	""" Creates a quit function throughout the game. """
+
+	pass
+
 
 
 
