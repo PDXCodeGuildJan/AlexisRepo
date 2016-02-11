@@ -1,0 +1,73 @@
+@import url(https://fonts.googleapis.com/css?family=Nova+Square);
+
+
+
+#css-zen-garden {
+	background-color: rgb(238,238,238);
+	font-family: "Nova Square", cursive;
+}
+
+.page-wrapper {
+	margin: 100px;
+}
+
+h1 {
+	color: rgb(226,48,69);
+}
+
+.participation a {
+	color: rgb(226,48,69);
+	text-decoration: none;
+}
+
+h2 {
+	background-color: rgb(226,48,69);
+	color: rgb(255,246,224);
+	border-radius: 2px;
+}
+
+.preamble {
+	background-color: rgb(27,69,73);
+	color: rgb(255,246,224);
+	border-radius: 2px;
+}
+
+.preamble p {
+	font-family: sans-serif;
+}
+
+.main article {
+	background-color: rgb(255,246,224);
+	border-style: solid;
+	border-color: gray;
+	border-width: thin;
+	border-radius: 2px;
+	margin-top: 20px;
+	margin-bottom: 20px;
+}
+
+.main p {
+	font-family: sans-serif;
+}
+
+
+footer a {
+	background-color: rgb(144,134,115);
+	color: rgb(255,246,224);
+	font-family: sans-serif;
+	text-decoration: none;
+}
+
+.zen-resources li {
+	background-color: rgb(226,48,69);
+	margin: 2px;	
+}
+
+li a {
+	color: rgb(255,246,224);
+	font-family: sans-serif;
+	text-decoration: none;
+}
+
+
+
