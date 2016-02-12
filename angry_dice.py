@@ -15,9 +15,10 @@ from random import randint
 
 def main():
 	""" The driving function that utilizes the smaller functions to create the Angry Dice game. """
+
 	start()
 
-	while True: # while what is true? aaahhh!!!
+	while True:
 
 		# roll dice
 		roll_dice()
@@ -38,7 +39,8 @@ def main():
 
 def start():
 	""" Welcomes the player and explains the rules of the game, as well as a quit option. """
-	print("Welcome to ANGRY DICE - the game where your dice get angry! Enter 'q' to quit at any point. \n")
+
+	print("Welcome to ANGRY DICE - the game where your dice get angry! Enter 'q' to quit. \n")
 	instruction_prompt = input("If you're new to the game, enter 'i' to view instructions. Otherwise hit return to start playing. ")
 
 	if instruction_prompt.lower() == "i":
@@ -96,6 +98,9 @@ def die_lock():
 
 	elif lock_choice.lower() == "no":
 		print("Okay, let's roll the dice again!")
+
+	elif lock_choice.lower() == "q":
+		exit()
 
 	else:
 		input("I'm sorry, I didn't understand that. Yes or no? ")
@@ -158,22 +163,13 @@ def winner():
 
 	print("Yay, you win!!! ")
 	play_again = input("Would you like to play again? Please answer yes or no. ")
-	if play_again == "yes".lower():
+	if play_again.lower() == "yes":
 		main()
-	elif play_again == "no".lower():
+	elif play_again.lower() == "no":
 		print("Thank you for playing Angry Dice! Goodbye!")
 		exit()
 	else:
-		print("I'm sorry, I didn't understand that. ", play_again)
-
-def end_game(string):
-	""" Creates a quit function throughout the game. """
-
-	pass
-
-
-
-
+		print("I'm sorry, I didn't understand that. ")
 
 class Die:
 	""" A class that defines the dice used to play the game. """
@@ -243,39 +239,10 @@ goal_dict = {1: [1, 2], 2: [3, 4], 3: [5, 6]}
 
 
 
-def test_advance_stage():
-	global current_stage
-
-	current_stage = 3
-	print(current_stage)
-	die_1.value = 5
-	die_2.value = 6
-	advance_stage()
-	print(current_stage)
-
-def test_die_lock():
-	die_1.value = 2
-	die_2.value = 6
-	print(die_lock())
-
-
-def test_double_angry():
-	global current_stage
-	current_stage = 3
-	die_1.value = 3
-	die_2.value = 3
-
-	double_angry()
-	print(current_stage)
 
 
 if __name__ == "__main__":
 	main()
-	# for x in range(200000):
-	# 	die_1.roll()
-	# 	print(die_1)
-
-
 
 
 
