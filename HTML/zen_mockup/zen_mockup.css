@@ -13,6 +13,7 @@
 
 h1 {
 	color: rgb(226,48,69);
+	font-size: 45px;
 }
 
 .participation a {
@@ -24,12 +25,18 @@ h2 {
 	background-color: rgb(226,48,69);
 	color: rgb(255,246,224);
 	border-radius: 2px;
+	font-weight: lighter;
+}
+
+.preamble h3 {
+	font-weight: lighter;
 }
 
 .preamble {
 	background-color: rgb(27,69,73);
 	color: rgb(255,246,224);
 	border-radius: 2px;
+	box-shadow: 22px 30px rgb(122,179,176);
 }
 
 .preamble p {
@@ -44,23 +51,31 @@ h2 {
 	border-radius: 2px;
 	margin-top: 20px;
 	margin-bottom: 20px;
+	box-shadow: 30px 38px rgb(122,179,176);
 }
 
 .main p {
 	font-family: sans-serif;
 }
 
+footer {
+	text-align: right;
+	font-size: 17px;
+}
 
 footer a {
 	background-color: rgb(144,134,115);
 	color: rgb(255,246,224);
 	font-family: sans-serif;
 	text-decoration: none;
+	box-shadow: 7px 10px rgb(216,207,188);
+	margin: -2px;
 }
 
 .zen-resources li {
 	background-color: rgb(226,48,69);
-	margin: 2px;	
+	margin: 4px;
+	box-shadow: 8px 11px rgb(245,149,129);	
 }
 
 li a {
