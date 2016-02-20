@@ -43,6 +43,7 @@ h3 {
 	border-radius: 2px;
 	box-shadow: 22px 30px rgb(122,179,176);
 	padding: 10px;
+	margin-bottom: 60px;
 }
 
 .preamble p {
@@ -52,13 +53,18 @@ h3 {
 .main article {
 	background-color: rgb(255,246,224);
 	border-style: solid;
-	border-color: gray;
+	border-color: black;
 	border-width: thin;
 	border-radius: 2px;
-	margin-top: 20px;
-	margin-bottom: 20px;
 	box-shadow: 30px 38px rgb(122,179,176);
-	padding-left: 18px;
+	padding-left: 20px;
+	padding-right: 20px;
+	width: 430px;
+}
+
+.participation {
+	margin-bottom: 25px;
+	margin-top: 10px;
 }
 
 .main p {
@@ -66,7 +72,7 @@ h3 {
 }
 
 footer {
-	text-align: right;
+	margin-left: 350px;
 	font-size: 17px;
 	padding: 25px;
 }
@@ -90,6 +96,9 @@ footer a {
 	width: 200px;
 	list-style-type: none;
 	text-align: center;
+	position: relative;
+	left: 500px;
+	bottom: 845px;
 }
 
 li a {
