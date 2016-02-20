@@ -1,5 +1,12 @@
 """Defines the Creature class, the base class of all living things in our game."""
 
+class Weapon:
+	"""Weapon objects that equip creatures.
+	"""
+
+	def __init__(self, atk_value):
+		self.base_damage = atk_value
+
 class Creature:
 
 	# this is where you declare constant variables in a class
@@ -27,8 +34,17 @@ class Creature:
 		
 
 	def attack(self):
+		"""Return the attack value of the creature, given its base attack 
+		value, Weapon attack value, and state.
+		"""
+		# Set the attack value to the base attack amount
+		atk_value = self.attack_points
+		# if we have a weapon, add the weapon's damage to atk_value
+		if self.weapon:
+			atk_value += self.weapon.base_damage
 
-		pass
+		# return the total calculated damage
+		return atk_value
 
 	def heal(self, amount):
 
