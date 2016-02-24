@@ -6,10 +6,30 @@ addItemButton.onclick = addItem;
 var addStockButton = document.getElementById("add-stock");
 addStockButton.onclick = addStock;
 
+var removeStockButton = document.getElementById("remove-stock");
+removeStockButton.onclick = removeStock;
+
 /* Toggles the inStock sttus on the selected rows inside of inventory.
 */
 
 function addStock() {
+	var inputs = document.getElementsByTagName("input");
+	var cbs = [];
+	var checked = [];
+	for (var i = 0; i < inputs.length; i++) {
+		if (inputs[i].type == "checkbox") {
+			cbs.push(inputs[i]);
+			if (inputs[i].checked) {
+				checked.push(inputs[i]);
+				if (inputs[i].id === "in-stock") {
+					checked.push(inputs[i]);
+				}
+
+			}
+		}
+
+	}
+	console.log("This is the list for adding stock ", checked);
 
 	// NOT ALLOWED TO USE querySelectorAll()
 
@@ -18,13 +38,34 @@ function addStock() {
 	// Change the inStock value of the selected things
 
 	// Update the display? (Depends on previous step)
+	// Find and create a list of all the checked checkbox nodes
 }
 
 function removeStock() {
 	// USE querySelectorAll()
+
+	var inputs = document.querySelectorAll("td>input[type=checkbox]:checked");
+
+	// var inputs = document.querySelectorAll("input");
+	// var cbs = [];
+	// var checked = [];
+	// for (var i = 0; i < inputs.length; i++) {
+	// 	if (inputs[i].type == "checkbox") {
+	// 		cbs.push(inputs[i]);
+	// 		if (inputs[i].checked) {
+	// 			checked.push(inputs[i]);
+	// 			if (inputs[i].id === "in-stock") {
+	// 				checked.push(inputs[i]);
+	// 			}
+
+	// 		}
+	// 	}
+	// }
+	console.log("This is the list for removing stock ", inputs);
+
 }
 
-/* Add the itme in the text fields to the inventory
+/* Add the item in the text fields to the inventory
 * list, which is in the table body (id="inventory")
 */
 function addItem() {
