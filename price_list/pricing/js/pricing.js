@@ -19,17 +19,18 @@ function addStock() {
 	for (var i = 0; i < inputs.length; i++) {
 		if (inputs[i].type == "checkbox") {
 			cbs.push(inputs[i]);
-			if (inputs[i].checked) {
+			if (inputs[i].checked && inputs[i].id != "in-stock") {
 				checked.push(inputs[i]);
-				if (inputs[i].id === "in-stock") {
-					checked.push(inputs[i]);
-				}
+			var status = inputs[i].parentNode.nextSibling.nextSibling.nextSibling;
+			status.textContent = "Yes";
+			status.className = "true";
+			console.log("in stock!", status);
 
-			}
+			} 
 		}
 
+
 	}
-	console.log("This is the list for adding stock ", checked);
 
 	// NOT ALLOWED TO USE querySelectorAll()
 
@@ -44,7 +45,16 @@ function addStock() {
 function removeStock() {
 	// USE querySelectorAll()
 
-	var inputs = document.querySelectorAll("td>input[type=checkbox]:checked");
+	var selected = document.querySelectorAll("td>input.selector[type=checkbox]:checked");
+
+	for (var i = 0; i < selected.length; i++) {
+		var status = selected[i].parentNode.parentNode.children[3];
+		status.textContent = "No";
+		status.className = "false";
+		console.log("last item", status);
+	}
+}
+
 
 	// var inputs = document.querySelectorAll("input");
 	// var cbs = [];
@@ -61,9 +71,8 @@ function removeStock() {
 	// 		}
 	// 	}
 	// }
-	console.log("This is the list for removing stock ", inputs);
 
-}
+
 
 /* Add the item in the text fields to the inventory
 * list, which is in the table body (id="inventory")
@@ -81,7 +90,7 @@ function addItem() {
 	}
 	var inventory = document.getElementById("inventory");
 
-	var newRow = "<tr><td><input type='checkbox'/> </td><td>" + materialName + "</td><td>"
+	var newRow = "<tr><td><input type='checkbox'class ='selector'/> </td><td>" + materialName + "</td><td>"
 	 + price + "</td><td class=" + inStock + ">" + instockConfirm + "</td></tr>";
 
 	inventory.innerHTML += newRow;
