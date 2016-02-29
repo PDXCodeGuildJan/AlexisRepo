@@ -17,7 +17,7 @@
 // var x = document.getElementById("myText").value;
 
 
-document.onclick = displayImages;
+window.onload = displayImages;
 
 function displayImages () {
 
@@ -41,13 +41,14 @@ function displayImages () {
 	getImages.innerHTML = tousLesImages;
 }
 
-function lightBox () {
+function lightBox (event) {
 	document.getElementById("image_show").className = "display_img";
 	// add event object, make sure you catch it in this function!
+	console.log(event.target.src);
+	document.getElementById("image_show").firstChild.src=event.target.src;
 	
 }
 
-// image.addEventListener("click", lightBox);
 document.getElementById("gallery").addEventListener("click", lightBox);
 
 console.log(lightBox);
