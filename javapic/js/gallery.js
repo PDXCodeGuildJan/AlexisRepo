@@ -54,4 +54,12 @@ document.getElementById("gallery").addEventListener("click", lightBox);
 console.log(lightBox);
 
 // third function to get rid of lightbox
+function removeLightBox (event) {
+	document.getElementById("image_show").firstChild.src=event.target.src;
+
+	document.getElementById("image_show").className="display_none";
+
+}
+
+document.getElementById("image_show").addEventListener("click", removeLightBox);
 
