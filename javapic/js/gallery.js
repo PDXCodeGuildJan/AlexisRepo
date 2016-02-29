@@ -16,7 +16,6 @@
 
 // var x = document.getElementById("myText").value;
 
-alert("Oh hey it works!");
 
 document.onclick = displayImages;
 
@@ -34,7 +33,7 @@ function displayImages () {
 	var image="<li><img src=images/pdxcg_" + i + ".jpg></li>";
 
 	console.log(displayImages);
-	tousLesImages = tousLesImages + image
+	tousLesImages = tousLesImages + image;
 
 }
 	tousLesImages = tousLesImages + "</ul>";
@@ -43,12 +42,15 @@ function displayImages () {
 }
 
 function lightBox () {
-	document.getElementById("image_show");
-
-
-
+	document.getElementById("image_show").className = "display_img";
+	// add event object, make sure you catch it in this function!
+	
 }
 
+// image.addEventListener("click", lightBox);
+document.getElementById("gallery").addEventListener("click", lightBox);
 
+console.log(lightBox);
 
+// third function to get rid of lightbox
 
