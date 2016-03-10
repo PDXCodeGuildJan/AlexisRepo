@@ -16,9 +16,10 @@ Including another URLconf
 """
 from django.conf.urls import url
 from django.contrib import admin
-from poll_site.views import hello_world_render
+from poll_site.views import *
 
 urlpatterns = [
     url(r'^admin/', admin.site.urls),
     url(r'^$', hello_world_render),
+    url(r'^corgi-link$', corgi_page),
 ]
