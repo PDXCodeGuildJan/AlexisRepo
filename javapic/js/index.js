@@ -9,11 +9,13 @@ function changeImage() {
 	if (i < 10) {
 		i = "0" + i;
 	}
-	
-
+	else if (i > 60) {
+		i = "0" + 1;
+	}
 
 	jumboImage.style.backgroundImage = "url('images/pdxcg_"+ i +".jpg')";
 	i++;
+
 }
 
 document.getElementById("jumbotron").addEventListener("click", changeImage);
