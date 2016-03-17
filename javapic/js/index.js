@@ -18,7 +18,8 @@ function changeImage() {
 
 }
 
-document.getElementById("jumbotron").addEventListener("click", changeImage);
+//document.getElementById("jumbotron").addEventListener("click", changeImage);
+setInterval(changeImage, 10000);
 
 
 
